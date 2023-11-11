@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import '~/App.css';
+import Home from './components/home.js';
+import { useState } from 'react';
 
 function App() {
+
+  const [user,setuser] = useState({
+    id: 123,
+    name: "tesst",
+    title: "title",
+    completed: true
+  })
+
+  function setUserFunction(user_parameter){
+    setuser(prev =>({
+      ...prev,
+      other: user_parameter.userId
+    }))
+  }
+
+  var homeProps={
+    user: user,
+    setUserFunction: setUserFunction
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{user.name}</h1>
+      <h2>{user.title}</h2>
+      <h3>{user.other}</h3>
+      <h3>{user.completed.toString()}</h3>
+      <Home props={homeProps}></Home>
     </div>
   );
 }
